@@ -5,6 +5,7 @@ const path = require('path');
 const cookieParser = require('cookie-parser');
 const logger = require('morgan');
 const mongoose = require('mongoose');
+const cors = require('cors');
 
 mongoose.connect('mongodb://localhost/AppStore-API', {
   keepAlive: true,
@@ -16,6 +17,11 @@ const indexRouter = require('./routes/index');
 const apiRouter = require('./routes/api');
 
 const app = express();
+
+app.use(cors({
+  credentials: true,
+  origin: ['http://localhost:3000']
+}));
 
 app.use(logger('dev'));
 app.use(express.json());
