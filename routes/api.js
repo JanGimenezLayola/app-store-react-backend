@@ -1,15 +1,26 @@
 'use strict';
 
 const express = require('express');
-const Aplication = require('../models/Aplication');
+const Application = require('../models/Application');
 const router = express.Router();
 
-router.get('/apps', (req, res, next) => {
-  // take all the apps from DB
+router.get('/apps', async (req, res, next) => {
+  try {
+    const listOfApps = await Application.find();
+    res.status(200).json({ listOfApps });
+  } catch (error) {
+    next(error);
+  }
 });
 
-router.post('/apps/new', (req, res, next) => {
-  // create new app
+router.post('/apps/new', async (req, res, next) => {
+  try {
+    const newApp = req.body;
+    const createdApp = await Application.create(newApp);
+    req.status(200).json(createdApp);
+  } catch (error) {
+    next(error);
+  }
 });
 
 router.put('/apps/:id/update', (req, res, next) => {
