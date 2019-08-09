@@ -34,8 +34,14 @@ router.put('/apps/:id/update', async (req, res, next) => {
   }
 });
 
-router.delete('apps/:id/delete', (req, res, next) => {
-  // delete one app
+router.delete('/apps/:id/delete', async (req, res, next) => {
+  const { id } = req.params;
+  try {
+    await Application.findByIdAndDelete(id);
+    res.status(200).json({ message: 'app deleted' });
+  } catch (error) {
+    next(error);
+  }
 });
 
 module.exports = router;
