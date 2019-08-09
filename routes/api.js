@@ -1,6 +1,7 @@
 'use strict';
 
 const express = require('express');
+const Aplication = require('../models/Aplication');
 const router = express.Router();
 
 router.get('/apps', (req, res, next) => {
