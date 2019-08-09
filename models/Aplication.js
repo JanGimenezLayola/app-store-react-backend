@@ -24,7 +24,7 @@ const aplicationSchema = new Schema({
   category: {
     type: String,
     required: true,
-    enum: []
+    enum: ['photography', 'games', 'developer-tools', 'productivity', 'business', 'music', 'social']
   },
   description: String
 });
