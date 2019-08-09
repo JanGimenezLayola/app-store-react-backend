@@ -23,8 +23,15 @@ router.post('/apps/new', async (req, res, next) => {
   }
 });
 
-router.put('/apps/:id/update', (req, res, next) => {
-  // update one app
+router.put('/apps/:id/update', async (req, res, next) => {
+  const { id } = req.params;
+  const appUpdated = req.body;
+  try {
+    const updated = await Application.findByIdAndUpdate(id, appUpdated, { new: true });
+    res.status(200).json(updated);
+  } catch (error) {
+    next(error);
+  }
 });
 
 router.delete('apps/:id/delete', (req, res, next) => {
