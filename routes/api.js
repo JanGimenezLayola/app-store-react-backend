@@ -17,7 +17,7 @@ router.post('/apps/new', async (req, res, next) => {
   try {
     const newApp = req.body;
     const createdApp = await Application.create(newApp);
-    req.status(200).json(createdApp);
+    res.status(200).json(createdApp);
   } catch (error) {
     next(error);
   }

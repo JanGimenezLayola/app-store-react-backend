@@ -13,6 +13,7 @@ mongoose.connect('mongodb://localhost/AppStore-API', {
 });
 
 const indexRouter = require('./routes/index');
+const apiRouter = require('./routes/api');
 
 const app = express();
 
@@ -23,6 +24,7 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);
+app.use('/api', apiRouter);
 
 app.use((req, res, next) => {
   res.status(404).json({ code: 'not found' });
